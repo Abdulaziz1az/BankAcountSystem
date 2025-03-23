@@ -14,29 +14,29 @@ class SavingAccount:
         if amount > self.balance:
              print("Insufficient funds")
         self.balance -= amount
-        recipient.depsit(amount)
-        return f"Transferred: ${amount}. Your new balance: ${self.balance}"
+        recipient.deposit(amount)
+        return f"Transferd: ${amount}. Your new balance: ${self.balance}"
     def getBlance(self):
         return f"Current balance: ${self.balance}"
     
 class CheckingAccount:
-    def __init__(self, blance):
-        self.balance = blance
+    def __init__(self, balance):
+        self.balance = balance
         
     def deposit(self, amount):
-        self.blance -= amount
-        return f"Deposited: ${amount}. New balance: ${self.blance}"
+        self.balance += amount
+        return f"Deposited: ${amount}. New balance: ${self.balance}"
     
     def withdrawl(self, amount):
         if amount > self.balance:
             print("Insufficient funds")
-        self.blance -= amount
-        return f"Withdrawl: ${amount}. New blance: ${self.blance}"
+        self.balance -= amount
+        return f"Withdrawl: ${amount}. New balance: ${self.balance}"
     
     def transfer(self, amount, recipient):
-        if amount > self.blance:
+        if amount > self.balance:
             print("Insufficient funds")
-        self.blance -= amount
+        self.balance -= amount
         recipient.deposit(amount)
         return f"Transferred: ${amount}. Your new balance: ${self.balance}"
     def getBlance(self):
@@ -57,15 +57,15 @@ def main():
         print("2. Checking Account")
         print("3. Exit")
         
-        account_Choice = input("Enter your choice (1-3): ")
+        account_choice = input("Enter your choice (1-3): ")
         
-        if account_Choice == "1":
+        if account_choice == "1":
             current_acount = saving
             account_type = "Saving"
-        elif account_Choice == "2":
+        elif account_choice == "2":
             current_acount = checking
             account_type = "Checking"
-        elif account_type == "3":
+        elif account_choice == "3":
             print("Thank you for using our Bank System! Goodbye.")
             break
         else:
@@ -90,12 +90,12 @@ def main():
                 amount = float(input("Ente withdrawal amount: "))
                 print(current_acount.withdrawl(amount))
                 
-            elif account_Choice == "3":
+            elif action_choice == "3":
                 amount = float(input("Enter transfer amount: "))
                 recipient = saving if current_acount == checking else checking
                 print(current_acount.transfer(amount, recipient))
                 
-            elif account_Choice == "4":
+            elif action_choice == "4":
                 print(current_acount.getBlance())
             
             elif action_choice == "5":
